@@ -1,0 +1,292 @@
+jmk-wifi patch 0003: survive a surprise USB unplug
+
+Why:
+  On the car an unplug (or rmmod) while the interface is up can crash the kernel, and
+  the head unit's kernel panics on an oops in interrupt context and on soft lockups
+  (BOOTPARAM_SOFTLOCKUP_PANIC, PANIC_TIMEOUT=5), so the head unit reboots. Upstream's
+  remove path has these problems:
+  - rtw_dev_remove() unregisters the netdevs *before* it marks the device removed, so
+    ndo_stop, cfg80211's stop_ap/disconnect and their commands run against a device
+    that is gone: register I/O with retries and timeouts, H2C commands, frames, waits.
+  - The rx and tx tasklets are never killed. A URB completion can schedule them just
+    before the adapter is freed; they then run on freed memory in softirq context.
+  - A tx URB completion always re-arms the tx tasklet, also after tx was stopped.
+  - The vendor request loop keeps retrying after the device is known to be gone.
+  - After the netdev is unregistered, the remove path can still call cfg80211
+    (disconnected, del_sta, scan_done). A scan request still pending at NETDEV_DOWN is
+    freed by cfg80211 while the driver keeps the pointer.
+
+What changes (all guards use the driver's own bSurpriseRemoved / bDriverStopped):
+  usb_intf.c
+    rtw_dev_remove(): if the usb core has marked the device NOTATTACHED, set
+      surprise-removed before anything else; skip LeaveAllPowerSaveMode() then.
+    usb_intf_stop(): after the URBs are killed, tasklet_kill() the rx and tx tasklets.
+  usb_ops_linux.c
+    usbctrl_vendorreq(): stop retrying once RTW_CANNOT_IO; skip the trailing 0x4e0
+      write then.
+    usb_write_port_complete(): do not schedule the tx tasklet when RTW_CANNOT_TX.
+  xmit_linux.c
+    rtw_os_xmit_schedule(): same rule.
+  rtw_cmd.c
+    rtw_cmd_filter(): refuse new commands once the device is removed, so callers
+      waiting for an ack (RTW_CMDF_WAIT_ACK) return at once.
+  os_intfs.c
+    netdev_close(), netdev_vir_if_close(): after the scan-abort waits, complete any
+      scan request the driver still holds, before cfg80211's NETDEV_DOWN frees it.
+    rtw_dev_unload(): no IPS register probe on a removed device.
+  ioctl_cfg80211.c
+    cfg80211_rtw_stop_ap(): nothing to do in hardware once removed (the AP state is
+      freed by free_mlme_ap_info() on the remove path).
+    rtw_cfg80211_indicate_scan_done(), _indicate_disconnect(), _indicate_sta_disassoc():
+      do not call into cfg80211 once the netdev is unregistered (adapter->registered).
+  rtw_ap.c
+    ap_free_sta(): no delba/deauth frames when RTW_CANNOT_RUN.
+
+Not changed: the netdev keeps the USB interface as its sysfs parent (SET_NETDEV_DEV).
+Both netdevs and the wiphy are unregistered synchronously inside the disconnect
+callback, which device_del() of the interface calls before it removes the interface's
+own kobject, so there is no kobject removal conflict. See README.md.
+
+diff --git a/core/rtw_ap.c b/core/rtw_ap.c
+index 2ec750a..2988012 100644
+--- a/core/rtw_ap.c
++++ b/core/rtw_ap.c
+@@ -3794,6 +3794,10 @@ u8 ap_free_sta(_adapter *padapter, struct sta_info *psta, bool active, u16 reaso
+ 	if (!psta)
+ 		return beacon_updated;
+ 
++	/* jmk-wifi: no delba/deauth frames for a stopped or removed device */
++	if (active == _TRUE && RTW_CANNOT_RUN(padapter))
++		active = _FALSE;
++
+ 	if (active == _TRUE) {
+ #ifdef CONFIG_80211N_HT
+ 		/* tear down Rx AMPDU */
+diff --git a/core/rtw_cmd.c b/core/rtw_cmd.c
+index f2055b7..317325d 100644
+--- a/core/rtw_cmd.c
++++ b/core/rtw_cmd.c
+@@ -393,6 +393,15 @@ int rtw_cmd_filter(struct cmd_priv *pcmdpriv, struct cmd_obj *cmd_obj)
+ {
+ 	u8 bAllow = _FALSE; /* set to _TRUE to allow enqueuing cmd when hw_init_completed is _FALSE */
+ 
++	/*
++	 * jmk-wifi: once the device is gone the command thread drops every queued
++	 * command without running it. Refuse new ones here instead, so callers that
++	 * wait for an ack (RTW_CMDF_WAIT_ACK) return at once rather than sleeping
++	 * until the thread notices and drains its queue.
++	 */
++	if (rtw_is_surprise_removed(pcmdpriv->padapter))
++		return _FAIL;
++
+ #ifdef SUPPORT_HW_RFOFF_DETECTED
+ 	/* To decide allow or not */
+ 	if ((adapter_to_pwrctl(pcmdpriv->padapter)->bHWPwrPindetect)
+diff --git a/os_dep/linux/ioctl_cfg80211.c b/os_dep/linux/ioctl_cfg80211.c
+index eeac2c5..de0f034 100755
+--- a/os_dep/linux/ioctl_cfg80211.c
++++ b/os_dep/linux/ioctl_cfg80211.c
+@@ -1284,7 +1284,13 @@ void rtw_cfg80211_indicate_disconnect(_adapter *padapter, u16 reason, u8 locally
+ 
+ 	_enter_critical_bh(&pwdev_priv->connect_req_lock, &irqL);
+ 
+-	if (padapter->ndev_unregistering || !rtw_wdev_not_indic_disco(pwdev_priv)) {
++	/*
++	 * jmk-wifi: nothing to tell cfg80211 once the netdev is unregistered (the
++	 * remove path disassociates after that). Its event would be queued on a
++	 * wiphy that is freed right after.
++	 */
++	if (padapter->registered
++		&& (padapter->ndev_unregistering || !rtw_wdev_not_indic_disco(pwdev_priv))) {
+ 		#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 11, 0) || defined(COMPAT_KERNEL_RELEASE)
+ 		RTW_INFO("pwdev->sme_state(b)=%d\n", pwdev->sme_state);
+ 
+@@ -2627,8 +2633,14 @@ void rtw_cfg80211_indicate_scan_done(_adapter *adapter, bool aborted)
+ 		RTW_INFO("%s with scan req\n", __FUNCTION__);
+ 		#endif
+ 
++		/*
++		 * jmk-wifi: after the netdev is unregistered cfg80211 has already freed
++		 * any request it still had for it; only forget our pointer.
++		 */
++		if (!adapter->registered)
++			RTW_INFO("%s: netdev unregistered, dropping scan request\n", __func__);
+ 		/* avoid WARN_ON(request != wiphy_to_dev(request->wiphy)->scan_req); */
+-		if (pwdev_priv->scan_request->wiphy != pwdev_priv->rtw_wdev->wiphy)
++		else if (pwdev_priv->scan_request->wiphy != pwdev_priv->rtw_wdev->wiphy)
+ 			RTW_INFO("error wiphy compare\n");
+ 		else
+ #if (KERNEL_VERSION(4, 7, 0) <= LINUX_VERSION_CODE)
+@@ -4726,6 +4738,10 @@ void rtw_cfg80211_indicate_sta_disassoc(_adapter *padapter, const u8 *da, unsign
+ 
+ 	RTW_INFO(FUNC_ADPT_FMT"\n", FUNC_ADPT_ARG(padapter));
+ 
++	/* jmk-wifi: stations freed after the netdev is unregistered have no listener */
++	if (!padapter->registered)
++		return;
++
+ #if defined(RTW_USE_CFG80211_STA_EVENT) || defined(COMPAT_KERNEL_RELEASE)
+     #if (LINUX_VERSION_CODE < KERNEL_VERSION(7, 1, 0))
+ 	cfg80211_del_sta(ndev, da, GFP_ATOMIC);
+@@ -5452,6 +5468,14 @@ static int cfg80211_rtw_stop_ap(struct wiphy *wiphy, struct net_device *ndev)
+ 
+ 	RTW_INFO(FUNC_NDEV_FMT"\n", FUNC_NDEV_ARG(ndev));
+ 
++	/*
++	 * jmk-wifi: cfg80211 calls this from NETDEV_GOING_DOWN while the remove path
++	 * unregisters the netdev. With the device gone there is nothing to stop in
++	 * hardware; the driver's AP state is freed by free_mlme_ap_info() later.
++	 */
++	if (rtw_is_surprise_removed(adapter))
++		return 0;
++
+ 	rtw_stop_ap_cmd(adapter, RTW_CMDF_WAIT_ACK);
+ 	return 0;
+ }
+diff --git a/os_dep/linux/os_intfs.c b/os_dep/linux/os_intfs.c
+index b734453..1fe2e20 100644
+--- a/os_dep/linux/os_intfs.c
++++ b/os_dep/linux/os_intfs.c
+@@ -3055,6 +3055,8 @@ static int netdev_vir_if_close(struct net_device *pnetdev)
+ #ifdef CONFIG_IOCTL_CFG80211
+ 	rtw_scan_abort(padapter);
+ 	rtw_cfg80211_wait_scan_req_empty(padapter, 200);
++	/* jmk-wifi: see netdev_close() */
++	rtw_cfg80211_indicate_scan_done(padapter, _TRUE);
+ 	adapter_wdev_data(padapter)->bandroid_scan = _FALSE;
+ #endif
+ 
+@@ -4155,6 +4157,12 @@ static int netdev_close(struct net_device *pnetdev)
+ 	rtw_scan_abort(padapter); /* stop scanning process before wifi is going to down */
+ #ifdef CONFIG_IOCTL_CFG80211
+ 	rtw_cfg80211_wait_scan_req_empty(padapter, 200);
++	/*
++	 * jmk-wifi: both waits above give up at once when the device is gone (and
++	 * after 200 ms otherwise). A scan request still held here would be freed by
++	 * cfg80211 at NETDEV_DOWN while we keep a pointer to it; finish it now.
++	 */
++	rtw_cfg80211_indicate_scan_done(padapter, _TRUE);
+ 	adapter_wdev_data(padapter)->bandroid_scan = _FALSE;
+ 	/* padapter->rtw_wdev->iftype = NL80211_IFTYPE_MONITOR; */ /* set this at the end */
+ #endif /* CONFIG_IOCTL_CFG80211 */
+@@ -4562,7 +4570,10 @@ void rtw_dev_unload(PADAPTER padapter)
+ 			}
+ 		}
+ 		/* check the status of IPS */
+-		if (rtw_hal_check_ips_status(padapter) == _TRUE || pwrctl->rf_pwrstate == rf_off) { /* check HW status and SW state */
++		/* jmk-wifi: rtw_hal_check_ips_status() reads registers; skip it when the device is gone */
++		if (rtw_is_surprise_removed(padapter))
++			RTW_PRINT("%s: device removed\n", __func__);
++		else if (rtw_hal_check_ips_status(padapter) == _TRUE || pwrctl->rf_pwrstate == rf_off) { /* check HW status and SW state */
+ 			RTW_PRINT("%s: driver in IPS-FWLPS\n", __func__);
+ 			pdbgpriv->dbg_dev_unload_inIPS_cnt++;
+ 		} else
+diff --git a/os_dep/linux/usb_intf.c b/os_dep/linux/usb_intf.c
+index 14f955f..defe5ac 100644
+--- a/os_dep/linux/usb_intf.c
++++ b/os_dep/linux/usb_intf.c
+@@ -865,6 +865,15 @@ static void usb_intf_stop(_adapter *padapter)
+ 	/* cancel out irp */
+ 	rtw_write_port_cancel(padapter);
+ 
++	/*
++	 * jmk-wifi: the URB completions above may have scheduled the rx and tx
++	 * tasklets. Wait for them here: with the URBs dead nothing schedules them
++	 * again, and on the remove path the memory they use is freed soon after.
++	 * Upstream never kills them. This function sleeps already (usb_kill_urb).
++	 */
++	tasklet_kill(&padapter->recvpriv.recv_tasklet);
++	tasklet_kill(&padapter->xmitpriv.xmit_tasklet);
++
+ 	/* todo:cancel other irps */
+ 
+ 	hal->usb_intf_start = _FALSE;
+@@ -1628,6 +1637,18 @@ static void rtw_dev_remove(struct usb_interface *pusb_intf)
+ 
+ 	dvobj->processing_dev_remove = _TRUE;
+ 
++	/*
++	 * jmk-wifi: on a surprise unplug the usb core has marked the device
++	 * NOTATTACHED before unbinding us. Upstream only sets bSurpriseRemoved after
++	 * the netdevs are closed and unregistered, so close, cfg80211 stop_ap and
++	 * disconnect still queue commands, wait for acks and try register I/O on a
++	 * device that is gone. Set it now; those paths check it.
++	 */
++	if (dvobj->pusbdev->state == USB_STATE_NOTATTACHED) {
++		dev_info(&pusb_intf->dev, "surprise removal, skipping hardware shutdown\n");
++		rtw_set_surprise_removed(padapter);
++	}
++
+ 	/* TODO: use rtw_os_ndevs_deinit instead at the first stage of driver's dev deinit function */
+ 	rtw_os_ndevs_unregister(dvobj);
+ 
+@@ -1646,7 +1667,8 @@ static void rtw_dev_remove(struct usb_interface *pusb_intf)
+ 	rtw_unregister_early_suspend(pwrctl);
+ #endif
+ 
+-	if (GET_HAL_DATA(padapter)->bFWReady == _TRUE) {
++	/* jmk-wifi: leaving power save talks to the firmware; pointless once it is gone */
++	if (GET_HAL_DATA(padapter)->bFWReady == _TRUE && !rtw_is_surprise_removed(padapter)) {
+ 		rtw_pm_set_ips(padapter, IPS_NONE);
+ 		rtw_pm_set_lps(padapter, PS_MODE_ACTIVE);
+ 
+diff --git a/os_dep/linux/usb_ops_linux.c b/os_dep/linux/usb_ops_linux.c
+index d897d26..6d09bd2 100644
+--- a/os_dep/linux/usb_ops_linux.c
++++ b/os_dep/linux/usb_ops_linux.c
+@@ -166,6 +166,13 @@ int usbctrl_vendorreq(struct intf_hdl *pintfhdl, u8 request, u16 value, u16 inde
+ 		if ((value >= FW_START_ADDRESS) || status == len)
+ 			break;
+ 
++		/*
++		 * jmk-wifi: once a failure has marked the device removed, retrying
++		 * only adds up to MAX_USBCTRL_VENDORREQ_TIMES timeouts per register
++		 * access on the remove path.
++		 */
++		if (RTW_CANNOT_IO(padapter))
++			break;
+ 	}
+ 
+ #if (defined(CONFIG_RTL8822B) || defined(CONFIG_RTL8821C)) || defined(CONFIG_RTL8822C)
+@@ -180,7 +187,8 @@ int usbctrl_vendorreq(struct intf_hdl *pintfhdl, u8 request, u16 value, u16 inde
+ 		current_reg_sec = REG_LOCAL_SEC;
+ 	}
+ 
+-	if (current_reg_sec == REG_ON_SEC) {
++	/* jmk-wifi: no follow-up write to a device that is gone */
++	if (current_reg_sec == REG_ON_SEC && !RTW_CANNOT_IO(padapter)) {
+ 		unsigned int t_pipe = usb_sndctrlpipe(udev, 0);/* write_out */
+ 		u8 t_reqtype =  REALTEK_USB_VENQT_WRITE;
+ 		u8 t_len = 1;
+@@ -555,10 +563,13 @@ check_completion:
+ 
+ 	rtw_free_xmitbuf(pxmitpriv, pxmitbuf);
+ 
+-	/* if(rtw_txframes_pending(padapter))	 */
+-	{
++	/*
++	 * jmk-wifi: do not re-arm the tx tasklet once tx is stopped or the device is
++	 * gone. It would only find RTW_CANNOT_TX and return, and on the remove path
++	 * it may otherwise run after the adapter is freed.
++	 */
++	if (!RTW_CANNOT_TX(padapter))
+ 		tasklet_hi_schedule(&pxmitpriv->xmit_tasklet);
+-	}
+ 
+ 
+ }
+diff --git a/os_dep/linux/xmit_linux.c b/os_dep/linux/xmit_linux.c
+index 9840fa3..bb89581 100644
+--- a/os_dep/linux/xmit_linux.c
++++ b/os_dep/linux/xmit_linux.c
+@@ -305,6 +305,10 @@ void rtw_os_xmit_schedule(_adapter *padapter)
+ 	if (!padapter)
+ 		return;
+ 
++	/* jmk-wifi: same rule as usb_write_port_complete(): no tasklet for a stopped or removed device */
++	if (RTW_CANNOT_TX(padapter))
++		return;
++
+ 	pxmitpriv = &padapter->xmitpriv;
+ 
+ 	_enter_critical_bh(&pxmitpriv->lock, &irqL);

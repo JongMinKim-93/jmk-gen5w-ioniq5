@@ -1,0 +1,11 @@
+88x2bu.ko for 3.18.24-tcc (Telechips tcc803x), GPL-2.0
+sha256 3e78ee38942e08667f68c287f0576ac21855c34cc516710de27cd49fa6137110  size 2722628
+source  https://github.com/cilynx/rtl88x2bu.git
+commit  fc158d1f71b9e5dfcd1fccaf4d28725b65086e3b
+patches (applied in this order, shipped next to this file):
+  0001-build-tcc803x-platform.patch  sha256 b550703326721b3e97d7b1e462009539a3b2c282e81d8f7165d06cb5d9e4a7cb
+  0002-block-usbfs-while-bound.patch  sha256 9837d40cd3ac9345d7c8e18a8c138c35df8575022565e1e82cdd556bc7e56c2d
+  0003-surprise-removal-guards.patch  sha256 5b398360d31f6dfb8e7a95e648be15e05d371b45314a5eb2eb6130e337188c51
+kernel  linux-3.18.24 (sha256 ed54cf8c3ac6b95fc17b07b3a236bc42719c96fee08fe696cabfb5b8e07f8c1b), car .config sha256 d35af8a0e9d098a47720ea66de594f21691d3d9608ce388ed199e0a5f82f9913
+toolchain https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7 @ 8b880805d454664b3eed11d0f053cdeafa1ff06e
+vermagic 3.18.24-tcc SMP preempt mod_unload ARMv7 p2v8 

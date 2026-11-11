@@ -1,0 +1,57 @@
+DaoUk7zAnjtedeuQURi2BHpfeBHq87+ZG4nERtajhVisyQzZn/J73NHoPooil4TSUDgCpejrR4mBCw8Ww7Tfar1oV+LUVJ2MiFiigO+OSVRoNBAIqA0R+TdTgQfo1lqAPGBeT/i10+SxPP0weKyKAO5MUC96GXIvTZCtggJeBGK948aZktyP9zqF8mohIa6GOsxy8J3nT2mYXy+S/Vjc4QwqNnmkAFZf8r+FLW8fuukR04wXAJtm17D/Ft0qqWN1inRUtO9wPw6IAclPKmRLhll+zC+QC06xMihqBuA2oIFgQeK/AoF84oAUqjMqL8UcWB5S4gPHPx2HeqSzaZtqRVR3NgF+Nu1M6NUgdlAVPwtEBhRe2p1raZ2adbgWYqRVcpmpycyH2EuOrWv6/b7eQ57EkriXoMahCINurG4gr5FvAb/3C4LG2ZJvD07Sn9JmzKmFRFxnkn+mZL72Gza6SDeDH83SiJ/wC6DUAlBxQEP/T0u5McJJiEW+8z/Q6KPg
+{
+ "expiry": {
+  "default_days": 183,
+  "min_version": {
+   "jmk-ambient-sound": "2.4.3",
+   "jmk-map-menu": "2.0.6",
+   "jmk-wifi": "1.3.3"
+  }
+ },
+ "packages": {
+  "jmk-ambient-sound": {
+   "built": "2026-11-10",
+   "file": "update/files/jmk-ambient-sound-2.4.4.zip",
+   "icon": "🎵",
+   "name": "Active Ambient",
+   "sha256": "4fdb309e7c0a7d558168be993e520ab20ab754fed8d9eed2799b68af1182ed2d",
+   "size": 113627,
+   "version": "2.4.4"
+  },
+  "jmk-map-menu": {
+   "built": "2026-11-11",
+   "file": "update/files/jmk-map-menu-2.0.8.zip",
+   "icon": "🚙",
+   "name": "JMK 런처 메뉴",
+   "sha256": "ea73895bc3b8478c5445ddfe50ab4f58168939b383d78f20544aab2fbfbd5de1",
+   "size": 147049,
+   "version": "2.0.8"
+  },
+  "jmk-wifi": {
+   "built": "2026-11-10",
+   "file": "update/files/jmk-wifi-1.3.3.zip",
+   "icon": "📶",
+   "name": "Wi-Fi Driver",
+   "sha256": "fa9b0db1865381640a9a7e889a9c9382815ed3212a15211fb30674f1d96b6197",
+   "size": 1002370,
+   "version": "1.3.3"
+  }
+ },
+ "published": "2026-11-11",
+ "seq": 2026111104,
+ "shared_codes": [
+  "BH62XGT6",
+  "JRDFLK6V",
+  "MYKWKGRS",
+  "N62HOTUI",
+  "NWQVMALR"
+ ],
+ "supporters": [
+  "4MKFCENK",
+  "BH62XGT6",
+  "FUOMXAFB",
+  "QGWWKPPK",
+  "X6YIQM3E",
+  "YBUJA4LP"
+ ]
+}

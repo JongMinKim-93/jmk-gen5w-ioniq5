@@ -1,0 +1,7 @@
+# 후원 코드 (런처 메뉴 ⚙ 설정·송금 메모의 8자). 원본은 gen5w.jmkim.dev 관리자 화면이고, make_manifest.py가 배포 때마다 옮겨 씁니다.
+4MKFCENK  # 서버에서
+BH62XGT6  # 2026-11-10 후원
+FUOMXAFB  # 서버에서
+QGWWKPPK  # 2026-11-10 후원
+X6YIQM3E  # 서버에서
+YBUJA4LP  # 서버에서

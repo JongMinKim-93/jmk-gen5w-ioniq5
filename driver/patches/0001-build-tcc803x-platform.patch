@@ -1,0 +1,104 @@
+jmk-wifi patch 0001: build for the Telechips tcc803x head unit
+
+Why:
+  Upstream builds for the PC it runs on (CONFIG_PLATFORM_I386_PC). We cross-build for
+  the Hyundai/Kia Gen5W AVNT head unit (ARMv7, Linux 3.18.24-tcc) with gcc 4.7.
+
+What changes in the Makefile:
+  - CONFIG_PLATFORM_I386_PC = n, new CONFIG_PLATFORM_JMK_TCC803X = y block:
+      * little endian, cfg80211 interface, cfg80211 station events (as the PC build)
+      * CONFIG_CONCURRENT_MODE: one radio, two netdevs (hotspot + client at once)
+      * CONFIG_FORCE_SW_CHANNEL_PLAN: rtw_country_code=KR is honoured even when the
+        dongle's efuse marks its channel plan as fixed
+      * ARCH=arm, KSRC/CROSS_COMPILE/KVER defaults (inner-build.sh passes the real ones)
+  - CONFIG_MP_INCLUDED = n: no manufacturing/test mode (ioctl_mp.c, rtw_mp.c); not
+    needed on the car and one less surface to build with gcc 4.7.
+  - CONFIG_LOAD_PHY_PARA_FROM_FILE = n: use the PHY/RF tables compiled into the driver
+    instead of reading /lib/firmware/ files that do not exist on the car.
+  - gcc 4.7: -Wno-cast-function-type and -Wno-stringop-overread (gcc 8 / gcc 11 options)
+    are passed through cc-disable-warning, so only to compilers that know them. Our
+    platform block adds -Wno-sign-compare -Wno-missing-field-initializers
+    -Wno-unused-label: with upstream's -Wextra, gcc 4.7 prints about 1400 of those for
+    upstream code and kernel headers, which hides the warnings that matter.
+  Interface names (ifname/if2name, default wlan%d), NAPI and GRO stay as upstream; they
+  are chosen with module parameters at insmod time.
+
+diff --git a/Makefile b/Makefile
+index cd4ae6a..84cab5d 100755
+--- a/Makefile
++++ b/Makefile
+@@ -5,12 +5,13 @@ ccflags-y += -Wextra
+ #ccflags-y += -pedantic
+ #ccflags-y += -Wshadow -Wpointer-arith -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
+ 
+-ccflags-y += -Wno-cast-function-type
++# JMK: the two options gcc 4.7 does not know are only passed when the compiler has them
++ccflags-y += $(call cc-disable-warning,cast-function-type)
+ ccflags-y += -Wno-type-limits
+ ccflags-y += -Wno-unused-function
+ ccflags-y += -Wno-unused-parameter
+ ccflags-y += -Wno-unused-variable
+-ccflags-y += -Wno-stringop-overread
++ccflags-y += $(call cc-disable-warning,stringop-overread)
+ ccflags-y += -Wno-array-bounds
+ ccflags-y += -Wno-address
+ ccflags-y += -Wno-missing-prototypes
+@@ -52,7 +53,8 @@ CONFIG_SDIO_HCI = n
+ CONFIG_GSPI_HCI = n
+ ########################## Features ###########################
+ CONFIG_NET_NS=y
+-CONFIG_MP_INCLUDED = y
++# JMK: no MP (manufacturing/test) mode; ioctl_mp and rtw_mp are not needed on the car
++CONFIG_MP_INCLUDED = n
+ CONFIG_POWER_SAVING = y
+ CONFIG_IPS_MODE = default
+ CONFIG_LPS_MODE = default
+@@ -63,7 +65,8 @@ CONFIG_WAPI_SUPPORT = n
+ CONFIG_EFUSE_CONFIG_FILE = y
+ CONFIG_EXT_CLK = n
+ CONFIG_TRAFFIC_PROTECT = n
+-CONFIG_LOAD_PHY_PARA_FROM_FILE = y
++# JMK: PHY tables are built in; do not read /lib/firmware at run time
++CONFIG_LOAD_PHY_PARA_FROM_FILE = n
+ CONFIG_TXPWR_BY_RATE = y
+ CONFIG_TXPWR_BY_RATE_EN = y
+ CONFIG_TXPWR_LIMIT = y
+@@ -123,7 +126,9 @@ CONFIG_RTW_SDIO_PM_KEEP_POWER = y
+ ###################### MP HW TX MODE FOR VHT #######################
+ CONFIG_MP_VHT_HW_TX_MODE = n
+ ###################### Platform Related #######################
+-CONFIG_PLATFORM_I386_PC = y
++CONFIG_PLATFORM_I386_PC = n
++# JMK: Telechips tcc803x head unit (Gen5W AVNT), Linux 3.18.24-tcc
++CONFIG_PLATFORM_JMK_TCC803X = y
+ CONFIG_PLATFORM_ANDROID_X86 = n
+ CONFIG_PLATFORM_ANDROID_INTEL_X86 = n
+ CONFIG_PLATFORM_JB_X86 = n
+@@ -1298,6 +1303,27 @@ else
+ ccflags-y += -DRTW_VHT_2G4=0
+ endif
+ 
++# JMK: Telechips tcc803x (Hyundai/Kia Gen5W AVNT), ARMv7, Linux 3.18.24-tcc,
++# built with the AOSP arm-eabi-4.7 toolchain. inner-build.sh passes KSRC and
++# CROSS_COMPILE on the command line.
++ifeq ($(CONFIG_PLATFORM_JMK_TCC803X), y)
++ccflags-y += -DCONFIG_LITTLE_ENDIAN
++ccflags-y += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
++# One radio, two netdevs: hotspot and client at the same time.
++ccflags-y += -DCONFIG_CONCURRENT_MODE
++# rtw_country_code= / rtw_channel_plan= always win over a plan locked in efuse.
++ccflags-y += -DCONFIG_FORCE_SW_CHANNEL_PLAN
++# gcc 4.7 with upstream's -Wextra prints ~1400 sign-compare and initializer warnings
++# for upstream code and kernel headers; turn those off so that real ones stand out.
++ccflags-y += -Wno-sign-compare -Wno-missing-field-initializers -Wno-unused-label
++ARCH := arm
++CROSS_COMPILE ?= arm-eabi-
++KVER ?= 3.18.24-tcc
++KSRC ?= /lib/modules/$(KVER)/build
++MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/
++INSTALL_PREFIX :=
++endif
++
+ ifeq (y, $(filter y, $(CONFIG_PLATFORM_I386_PC) $(CONFIG_PLATFORM_ARM_NV_NANO) $(CONFIG_PLATFORM_ARM_RPI)))
+ ccflags-y += -DCONFIG_LITTLE_ENDIAN
+ ccflags-y += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
