@@ -4,7 +4,7 @@
  "versions": {},
  "min_version": {
   "jmk-ambient-sound": "2.4.3",
-  "jmk-wifi": "1.3.3",
+  "jmk-wifi": "1.3.5",
   "jmk-map-menu": "2.0.6"
  }
 }
