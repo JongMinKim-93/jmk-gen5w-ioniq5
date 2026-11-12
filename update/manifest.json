@@ -37,7 +37,7 @@
   }
  },
  "published": "2026-11-12",
- "seq": 2026111204,
+ "seq": 2026111205,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
@@ -45,20 +45,6 @@
   "N62HOTUI",
   "NWQVMALR"
  ],
- "supporter_packages": {
-  "jmk-ambient-sound": {
-   "built": "2026-11-12",
-   "codes": [
-    "LY3LOBUL"
-   ],
-   "file": "update/files/jmk-ambient-sound-2.5.0.zip",
-   "icon": "🎵",
-   "name": "Active Ambient",
-   "sha256": "cbaf0e62289b2d1ad04835c71a4dfefb95a850b603b8ad16feec28828f0d4290",
-   "size": 116659,
-   "version": "2.5.0"
-  }
- },
  "supporters": [
   "4MKFCENK",
   "BH62XGT6",

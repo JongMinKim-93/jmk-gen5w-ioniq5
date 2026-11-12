@@ -1,4 +1,4 @@
 {
- "_note": "Active Ambient 2.5.0 (CarPlay tap by preload) on our car only until CarPlay is checked there",
- "packages": {"jmk-ambient-sound": {"version": "2.5.0", "codes": ["LY3LOBUL"]}}
+ "_note": "Versions offered only to some cars: {\"<package>\": {\"version\": \"x.y.z\", \"codes\": [\"ABCDEFGH\"]}}. Test builds are not put here (the zips would be public): they go on over adb.",
+ "packages": {}
 }
