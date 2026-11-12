@@ -1,4 +1,4 @@
-NFa91p8/kvelkBD+LCAa1RWBBng5k+MXaY1idzWa7ee52jrsbanwXrhWgYNqw3tMcQ+2Q8tcEOxW1SLxvfR+5xwouv/fQTiUTLIYuPI1e/BdTm/NMr7haig/PeqPs+js4/WlBQl+lRsbFiDbByKEYpmQzf7Aj3mPVwCXQzBW9i/nIbuiuk2DceS2XLQMQEwshA+4G9m35xYI6XxnjHAYjVR9CCs2RqE5oaikoR0s2rvSju81eYpy+5zf638qJbuoUwUovW3MpIs54yoB3vyBL+tDRB2x/oelvulih5XzV126eG5CZhIVMd2ilBvTjicq0Gd1slNVzFio3n7oRqZ3aIT7iJHIAcuzchgxZzH7yeDxzoe3NfjOjauFvXyn1/yTYzaV2lKDPeOKEWjinxNLWCiaZbizmnxEfVjbzgs1FWsi6dGEZQvwR2cWbQQoiGC8u9fnvY5eS0lxVA9pU2fYFJ3FEXLRrGNwSYwRsyrlLhaw4qYIiEMKgDNKZsnR5QxR
+UjENEk6FLre4pIyqTFVQjQZSUgq0YsAirXVWJVT5HVTgqWyyBM1pnayGRqUh3hYC0a8kJM44EOAaIJ8nkipJyDNbdqmKHtyEClBFCkilQGxfPUrpdXn52u3tLBhqBSbUk+/dWoYKD+z9JivR5ocn5SP+rBJhsgIAraJVHZCCfsKHEtiSYNJ2c4SOkoQvlPL09hhIYtSABLkNV0EvDcf7bgJp6kRijtG4n3+pp0UyftXFxuqZqJClS0NlurqiZyQzAHH6RWHHcp6gBiEHV7EFHhv3kHXcxWTVwd7+1mrYjqimgi/gJ7IYKmh0GkLq42ucppUUVhUPY3H0JFj9o3xqLRRSECFybYLPXyQ/FvrduMYvdQycImCEOQQ/+KSrX2WohpwRtdysp2i6jZV/5fd41z2Ct1kNx+8StOJaVV9mKk7Uo21Ubl6Up8saWcApkHDH6SptpkX24wggZRq8unYMgcEzB/clZ8bEOVvEgVi6miNr7jybWGuo0eu4/afnBW+G
 {
  "expiry": {
   "default_days": 183,
@@ -38,7 +38,7 @@ NFa91p8/kvelkBD+LCAa1RWBBng5k+MXaY1idzWa7ee52jrsbanwXrhWgYNqw3tMcQ+2Q8tcEOxW1SLx
   }
  },
  "published": "2026-11-12",
- "seq": 2026111203,
+ "seq": 2026111204,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
@@ -46,6 +46,20 @@ NFa91p8/kvelkBD+LCAa1RWBBng5k+MXaY1idzWa7ee52jrsbanwXrhWgYNqw3tMcQ+2Q8tcEOxW1SLx
   "N62HOTUI",
   "NWQVMALR"
  ],
+ "supporter_packages": {
+  "jmk-ambient-sound": {
+   "built": "2026-11-12",
+   "codes": [
+    "LY3LOBUL"
+   ],
+   "file": "update/files/jmk-ambient-sound-2.5.0.zip",
+   "icon": "🎵",
+   "name": "Active Ambient",
+   "sha256": "cbaf0e62289b2d1ad04835c71a4dfefb95a850b603b8ad16feec28828f0d4290",
+   "size": 116659,
+   "version": "2.5.0"
+  }
+ },
  "supporters": [
   "4MKFCENK",
   "BH62XGT6",
