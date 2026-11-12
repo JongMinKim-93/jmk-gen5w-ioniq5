@@ -1,4 +1,4 @@
-dPT3YH3WHapSnlcEs6vFiZreEbZ3nTyyCU/qiqRcnhluxqf3WKK8hW4nr7UHG8lX5HFsU3Ft8og9qUse+K/DP40wGUytQmZyiJgaS1ZYAkLcgRHl4XPX1k/s8eSkjS6rAelRpn545WxNDJJqPqJKeAf8aa/FMqCjAtjef+ZxQw/JA3lCJ/+o+l6E0TJj1vabscWH3GRorEMN3DqsKQ0Hgm1HZR/e12eqDjMUNIO1E88z+ocEwcct8Pl8GUbzWc2Oxq11GgB50mNM8uaXk2QrizEbNQwomXW+D6SPUq3OYXHHh3acq/DlR7FRufBYlfdwi2yq+ibL0ZTOQ2r4wMpGHq4oehxCDEEnXkoLKT+FkQoV6iLs9o3ocT/wequFxIYevTX5MNLq5mcqUu/u8MheWiFRj/oWKm6XFh9CtWIUNfmeUHL6HVBML5GJ/uwzkSkM6Ji8BQiP3dnqGUnxt5IiFCJl5iVVS5oXY4CELMLpBbDZu8jdvCLvCuCErvcCWoJ1
+NFa91p8/kvelkBD+LCAa1RWBBng5k+MXaY1idzWa7ee52jrsbanwXrhWgYNqw3tMcQ+2Q8tcEOxW1SLxvfR+5xwouv/fQTiUTLIYuPI1e/BdTm/NMr7haig/PeqPs+js4/WlBQl+lRsbFiDbByKEYpmQzf7Aj3mPVwCXQzBW9i/nIbuiuk2DceS2XLQMQEwshA+4G9m35xYI6XxnjHAYjVR9CCs2RqE5oaikoR0s2rvSju81eYpy+5zf638qJbuoUwUovW3MpIs54yoB3vyBL+tDRB2x/oelvulih5XzV126eG5CZhIVMd2ilBvTjicq0Gd1slNVzFio3n7oRqZ3aIT7iJHIAcuzchgxZzH7yeDxzoe3NfjOjauFvXyn1/yTYzaV2lKDPeOKEWjinxNLWCiaZbizmnxEfVjbzgs1FWsi6dGEZQvwR2cWbQQoiGC8u9fnvY5eS0lxVA9pU2fYFJ3FEXLRrGNwSYwRsyrlLhaw4qYIiEMKgDNKZsnR5QxR
 {
  "expiry": {
   "default_days": 183,
@@ -20,25 +20,25 @@ dPT3YH3WHapSnlcEs6vFiZreEbZ3nTyyCU/qiqRcnhluxqf3WKK8hW4nr7UHG8lX5HFsU3Ft8og9qUse
   },
   "jmk-map-menu": {
    "built": "2026-11-12",
-   "file": "update/files/jmk-map-menu-2.1.0.zip",
+   "file": "update/files/jmk-map-menu-2.1.1.zip",
    "icon": "🚙",
    "name": "JMK 런처 메뉴",
-   "sha256": "07d5b93a0c3262cda3fadab1f08118163b6d7f537f23c806a65655e1204c25c1",
-   "size": 150462,
-   "version": "2.1.0"
+   "sha256": "05b8b4dd7d52250f33f103ef620dc0d761c91fbdbcb5aeefe40327c903595874",
+   "size": 156386,
+   "version": "2.1.1"
   },
   "jmk-wifi": {
-   "built": "2026-11-10",
-   "file": "update/files/jmk-wifi-1.3.3.zip",
+   "built": "2026-11-12",
+   "file": "update/files/jmk-wifi-1.3.4.zip",
    "icon": "📶",
    "name": "Wi-Fi Driver",
-   "sha256": "fa9b0db1865381640a9a7e889a9c9382815ed3212a15211fb30674f1d96b6197",
-   "size": 1002370,
-   "version": "1.3.3"
+   "sha256": "88b64a461f4b080aaf25996b8dde0faaa1d0c0b29b37bf33a23b09b5dd7802c4",
+   "size": 1013291,
+   "version": "1.3.4"
   }
  },
  "published": "2026-11-12",
- "seq": 2026111202,
+ "seq": 2026111203,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",

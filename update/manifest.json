@@ -19,25 +19,25 @@
   },
   "jmk-map-menu": {
    "built": "2026-11-12",
-   "file": "update/files/jmk-map-menu-2.1.0.zip",
+   "file": "update/files/jmk-map-menu-2.1.1.zip",
    "icon": "🚙",
    "name": "JMK 런처 메뉴",
-   "sha256": "07d5b93a0c3262cda3fadab1f08118163b6d7f537f23c806a65655e1204c25c1",
-   "size": 150462,
-   "version": "2.1.0"
+   "sha256": "05b8b4dd7d52250f33f103ef620dc0d761c91fbdbcb5aeefe40327c903595874",
+   "size": 156386,
+   "version": "2.1.1"
   },
   "jmk-wifi": {
-   "built": "2026-11-10",
-   "file": "update/files/jmk-wifi-1.3.3.zip",
+   "built": "2026-11-12",
+   "file": "update/files/jmk-wifi-1.3.4.zip",
    "icon": "📶",
    "name": "Wi-Fi Driver",
-   "sha256": "fa9b0db1865381640a9a7e889a9c9382815ed3212a15211fb30674f1d96b6197",
-   "size": 1002370,
-   "version": "1.3.3"
+   "sha256": "88b64a461f4b080aaf25996b8dde0faaa1d0c0b29b37bf33a23b09b5dd7802c4",
+   "size": 1013291,
+   "version": "1.3.4"
   }
  },
  "published": "2026-11-12",
- "seq": 2026111202,
+ "seq": 2026111203,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
