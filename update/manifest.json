@@ -10,21 +10,21 @@
  "packages": {
   "jmk-ambient-sound": {
    "built": "2026-11-12",
-   "file": "update/files/jmk-ambient-sound-2.5.2.zip",
+   "file": "update/files/jmk-ambient-sound-2.5.3.zip",
    "icon": "🎵",
    "name": "Active Ambient",
-   "sha256": "ff1137c87d357da3a67e0abf761cc38b5e31f93bad32648c9c3b5cad1202afd1",
-   "size": 116838,
-   "version": "2.5.2"
+   "sha256": "4d219719c0017ed92cc8af8b3775c2b327a47f9b077a762a98d0f20efca53119",
+   "size": 117110,
+   "version": "2.5.3"
   },
   "jmk-map-menu": {
    "built": "2026-11-12",
-   "file": "update/files/jmk-map-menu-2.1.4.zip",
+   "file": "update/files/jmk-map-menu-2.1.5.zip",
    "icon": "🚙",
    "name": "JMK 런처 메뉴",
-   "sha256": "bcfb0307627320994dbaa2a43d5a8e0a8532b87ec6224641881c47daea314d2d",
-   "size": 159744,
-   "version": "2.1.4"
+   "sha256": "1a85c1c3268a78d794b3072df2e04808a29d4c58588e6944b447186a9fd6893e",
+   "size": 159779,
+   "version": "2.1.5"
   },
   "jmk-wifi": {
    "built": "2026-11-12",
@@ -37,7 +37,7 @@
   }
  },
  "published": "2026-11-12",
- "seq": 2026111207,
+ "seq": 2026111208,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
