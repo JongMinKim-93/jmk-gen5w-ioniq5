@@ -1,4 +1,4 @@
-WWTp0hbJ6qHsbtx0a2ZIZesw1CMBMGsROCX0E9I+wSHMQ2w4hgDLZOEJgfWbulGOAbS01szjW5Pw0h8D8Qhmub9OHpURGf9miCWGJR1TqNMfAb2gqkIYQFKyFLyH0jTjcWtLSM/KP3YzT92Nk79qof+lZtZAbm4W321858jn3OCYhyX/kzeFEJ/bPq6jXF4crI0AsVjJrlCC2A/4JoQR5K1mNHQgwXMEh3WrWf72RoVGhcssycZGGuL5Fh4QI4j5j/ob5/O1smS+6lAbDsl+82lTFsZ0GnbCYyTcv9chTuGiIlcdhZ+UwBbuBS158Ck6WLIsrQNGbpIy0reLwbii97F6DIDbD7IMsN9OG/HdR2/Nh1A111xAgLFKJRyJAYHX7k+aYdtQ/gjdIFqBSQ2M+/s7Z3lzCldws14+3Zj6QWrbSCMEZq9Wl7Ckf83p9EK6vLp7nKZ05H25rVHkKHrdVkT3OzuMAoJF7+q1f8HK3qH5t3cjxra1laPaes//1JJQ
+m5/sUlUP/INvRnxtvtT0CJ7UrNfI5bvmCZ+fWb9O04k7/vqxIvtP8sP0Kh0S131+jb3Hzh6TDkrIDlL1PX2d4szhd7EyR3ZP9xEzqr+6NdwIxXqWsDByA/7rlY+FJqMOE+OHAOHTtkYLxslnSI+O59g7RiheaZh+1Hzr4eTtbA2l0TY5KACXbffZtavYQKpQE6gCUcYz/cnCVMRjtwGmG7/Lu3/5tMCgjdtPWZzYK1NLvk749ioySUSyCXIdQHxak3yh8YV04sAHORPa3XnaU0wd3E+rjEr7xwlPmEnBWVbqmjEcoIhh+xXynomyIsryi3ekbq1XIQNM7yDI5/IsEQgBXF+UziLMXR0SEmgYlqvaj9sG78oppxj34SQEB+xOm+IsNSAOtHJRD6YTiteL7OLgM13CddpGUaXnpWSN3T23G/kKQF4mhkA6eAMaWNIeRTH7Q4kpVb6e+cTU60sWZKSwaYuWIZgfXJCxJwlnM7Xd+pR8pi88cFso0F0KlBqW
 {
  "expiry": {
   "default_days": 183,
@@ -10,35 +10,35 @@ WWTp0hbJ6qHsbtx0a2ZIZesw1CMBMGsROCX0E9I+wSHMQ2w4hgDLZOEJgfWbulGOAbS01szjW5Pw0h8D
  },
  "packages": {
   "jmk-ambient-sound": {
-   "built": "2026-11-12",
-   "file": "update/files/jmk-ambient-sound-2.5.3.zip",
+   "built": "2026-11-13",
+   "file": "update/files/jmk-ambient-sound-2.5.4.zip",
    "icon": "🎵",
    "name": "Active Ambient",
-   "sha256": "4d219719c0017ed92cc8af8b3775c2b327a47f9b077a762a98d0f20efca53119",
-   "size": 117110,
-   "version": "2.5.3"
+   "sha256": "4edd09b8a07ba334cfa60561277f73f433cfd16f55f5f819c0a9144e48dadbf8",
+   "size": 119552,
+   "version": "2.5.4"
   },
   "jmk-map-menu": {
-   "built": "2026-11-12",
-   "file": "update/files/jmk-map-menu-2.1.5.zip",
+   "built": "2026-11-13",
+   "file": "update/files/jmk-map-menu-2.1.6.zip",
    "icon": "🚙",
    "name": "JMK 런처 메뉴",
-   "sha256": "1a85c1c3268a78d794b3072df2e04808a29d4c58588e6944b447186a9fd6893e",
-   "size": 159779,
-   "version": "2.1.5"
+   "sha256": "b9ed03b58aea643be66942fb170a8d5652fd912b51c0d73a0d8897ccdfa36bbe",
+   "size": 160843,
+   "version": "2.1.6"
   },
   "jmk-wifi": {
-   "built": "2026-11-12",
-   "file": "update/files/jmk-wifi-1.3.5.zip",
+   "built": "2026-11-13",
+   "file": "update/files/jmk-wifi-1.3.6.zip",
    "icon": "📶",
    "name": "Wi-Fi Driver",
-   "sha256": "3a2cc1cf05d2b3e09f6d2a01cfb47638cd8b75743857075efd4b68ddb56e1b45",
-   "size": 1013431,
-   "version": "1.3.5"
+   "sha256": "89b6e7a85e9a30e4ec517b7f73f5867d1dc2db9b87c1cc6a6b1b84a0ba90b2d5",
+   "size": 1014777,
+   "version": "1.3.6"
   }
  },
- "published": "2026-11-12",
- "seq": 2026111208,
+ "published": "2026-11-13",
+ "seq": 2026111301,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
@@ -48,6 +48,7 @@ WWTp0hbJ6qHsbtx0a2ZIZesw1CMBMGsROCX0E9I+wSHMQ2w4hgDLZOEJgfWbulGOAbS01szjW5Pw0h8D
  ],
  "supporters": [
   "4MKFCENK",
+  "75W6V55N",
   "BH62XGT6",
   "CXARBN6Y",
   "FUOMXAFB",
