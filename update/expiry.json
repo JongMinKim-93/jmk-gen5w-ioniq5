@@ -3,8 +3,8 @@
  "default_days": 183,
  "versions": {},
  "min_version": {
-  "jmk-ambient-sound": "2.4.3",
-  "jmk-wifi": "1.3.5",
-  "jmk-map-menu": "2.0.6"
+  "jmk-ambient-sound": "2.5.5",
+  "jmk-wifi": "1.3.7",
+  "jmk-map-menu": "2.2.1"
  }
 }
