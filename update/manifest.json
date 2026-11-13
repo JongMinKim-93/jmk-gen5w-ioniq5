@@ -18,13 +18,13 @@
    "version": "2.5.4"
   },
   "jmk-map-menu": {
-   "built": "2026-11-13",
-   "file": "update/files/jmk-map-menu-2.1.6.zip",
+   "built": "2026-11-14",
+   "file": "update/files/jmk-map-menu-2.2.0.zip",
    "icon": "🚙",
    "name": "JMK 런처 메뉴",
-   "sha256": "b9ed03b58aea643be66942fb170a8d5652fd912b51c0d73a0d8897ccdfa36bbe",
-   "size": 160843,
-   "version": "2.1.6"
+   "sha256": "578e061c340c435ca9b04359f98240fb51552cb14291e3223da14bf343254452",
+   "size": 179185,
+   "version": "2.2.0"
   },
   "jmk-wifi": {
    "built": "2026-11-13",
@@ -36,8 +36,8 @@
    "version": "1.3.6"
   }
  },
- "published": "2026-11-13",
- "seq": 2026111301,
+ "published": "2026-11-14",
+ "seq": 2026111401,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
@@ -51,6 +51,7 @@
   "BH62XGT6",
   "CXARBN6Y",
   "FUOMXAFB",
+  "HH2KMTQO",
   "LY3LOBUL",
   "P7WRSDC3",
   "QGWWKPPK",
