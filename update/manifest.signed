@@ -1,5 +1,11 @@
-W88b14SoQQ4S1AqeFFN2Ph20xydt/ct9To9wsNJexM8V4AN6cSjJ4UT9w3jGmFsXNog/gqEOXENLqhk1Ayl2+Y1j6FSIxbLVYFbEElrowBLohY/kCulij4xpyTtchubs7HCqrf8o9z219ouAXscefEz63m7j2ivEyD7Lz6bRSzyfNHX7OEIz5+Kvh1ldmdAgZZq7BqQ+5YFTXGqRfcs3HZGNKTpmtxbjhyYcsOULfiFmdudTq9tcOW8v93hgPvo2goIs8Fd3ur6zLPtU753gVRGFuqBKVpY/ecf3FeALeb7QzP7w+d7SoYEBtbotcJ5NaILklw+tA5TX5h7vDPx7dr49Cdr/U2Gu2FKXGYwDQ3oOfKEukUiiNYDrswhmXlP0zIvuapeESVhcYub4Es+V58TtyiveMnhSwdwnE5pdtOAJ0qSGIWjCKBVx5or1TaSYVU0d9FORyl2jsr3kB178syarW3UBhHo7JhGMhxlZ4WAgbMO95jGeQ7OBipgK+t66
+Rg8v4JazIUAJ66eFTO+a8jnRbnDNxk8tjzhttrUOw3UtBxQf3Dybw2vStiUmAkTLFnY0EbLtVdDOVtp2Fz6G1RpzO8xTqRh0IpTgTLBdjqihZ6biNm8M+hxNzmRP2g0kc8bAjcfp7rLMVLNrjrYnSlTYIND3BmIs7yBYyOtQWxEVc/T6q4nTsGDs8PUd/dYyYv8NJ4Tn/u5C9qkwbOmBh9vb+7ETuEvrJ6k0mdySYAuG6j6toXsA3O8D6/ewMY3OfnbW8UX9c9nC9p9Gx8n3G/hjFbGq1WPerbmONoUdJyIzNqi0Hdy6wfHDIeOMJ1Zse7erFD8eR/6d+sv9ghkZk9WshQY0Mrw9jZqPpWJ+dtZX9b2IW2LnMPsUSkw0cMvFDV9/LB+VOKke5IRwfGt7z7tsloel4c3kWzIU2cqAQSUC+qMUS+ifzyl7Dl1UwxUcyhC9gMdKbQ2Hpc8M9PHROQG63cBzBnsauNH9vRiZD7HsZE4kg9JoqX2gZwW6F7XG
 {
+ "car_features_by_name": {
+  "GL3HEV.KOR.0000.V039.001.260902": [
+   "ambient",
+   "consent"
+  ]
+ },
  "expiry": {
   "default_days": 183,
   "min_version": {
@@ -38,7 +44,7 @@ W88b14SoQQ4S1AqeFFN2Ph20xydt/ct9To9wsNJexM8V4AN6cSjJ4UT9w3jGmFsXNog/gqEOXENLqhk1
   }
  },
  "published": "2026-11-14",
- "seq": 2026111401,
+ "seq": 2026111402,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",

@@ -1,4 +1,10 @@
 {
+ "car_features_by_name": {
+  "GL3HEV.KOR.0000.V039.001.260902": [
+   "ambient",
+   "consent"
+  ]
+ },
  "expiry": {
   "default_days": 183,
   "min_version": {
@@ -37,7 +43,7 @@
   }
  },
  "published": "2026-11-14",
- "seq": 2026111401,
+ "seq": 2026111402,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
