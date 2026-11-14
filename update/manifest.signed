@@ -1,4 +1,4 @@
-n6ntZ4TA22CtMamadHmd6WiJCxQET/LmabKxBXYDUzocQBPuvddfgWAEOfe2ZnWMJRFLtMnj9zj43qdjJ4RLqF29qr/Dn8As8gsTVsEPu7nUu52lEdhi3Mj+UolYOpKByZGYv+ZGoZKCDCHzNDKS2rJODfQAWTq75C3FibE6O68L64lZy4uo+rDPm+MuR4kKEm6gQ2b82151+n/eQRUtEgXW/LZMjSDCLBBgsa9bq1gfxs5BMLdDWOW0XtXlcyOsktS2w9bfWl9uqEKY/sXrfU+vA5HvzbBC3MtTxubhba9wfcDhQPnlMv9EEhcvELTUR2XU/HjXNA/qngmmGTW1mHGydPZdRmSeesoIPDgCtFbWIbELN6D5Don4qZoKE3zr8pb1/eNcvUdirNfMrQmbDpcwuaFivhdW25fKYnWA1qPeFwGf5WUeHDdiA14daX9Ezb8ffy+Kp75AMUaXx6NLLT18oaj8SQDf1WwPvB2lX0YtsCPa2lg9TwdRIac1/fWJ
+mCyNLJnRuusncx4FUnB2RDj4Vj6RsXGTKoWMhRNrwQ14nix5f+LPjuVfPL9p6AokKWPm+DmCps6uD9q0Y1GBWX9tLxJWOzfUiBX4evkrBHRuRFQCSH7x2m1hiq+MsAf7x6JNBVsL4FpTcSGrcEnNxAxsEB+HWC6rIoO8esc7hpZJMr3IZKHgCSohubme8UE+9VZEJlYBv+VWnnQY6Mjg8tHTA8O0pWQmnwwp+1xacLlJwMqsRJwXbVg7+0SlL9/xoJflS10Ncr9leI4EDZSi35ohmjLYVa57do1oNJuvsdui2WXh78J5LySCvIA3SYWLr9KX+Qa9m0YERlqXXSW0cC2GwUL2wdRuHgLHK61R4OW9Svx2yBVU6YmnBZpn9tx9ikW0MYP5Laz94wxucDifgBV+CgqNgp9xOPnSa93PauBUWXfqGgV3G2vLK9eOSezlun4VKhZWNkAaPEEPLN1H3HUyW+D4ODdkTcsK7ApPhJvy/G2a49HK3xZ03QM6xtZl
 {
  "car_features_by_name": {
   "GL3HEV.KOR.0000.V039.001.260902": [
@@ -17,12 +17,12 @@ n6ntZ4TA22CtMamadHmd6WiJCxQET/LmabKxBXYDUzocQBPuvddfgWAEOfe2ZnWMJRFLtMnj9zj43qdj
  "packages": {
   "jmk-ambient-sound": {
    "built": "2026-11-14",
-   "file": "update/files/jmk-ambient-sound-2.5.5.zip",
+   "file": "update/files/jmk-ambient-sound-2.5.6.zip",
    "icon": "🎵",
    "name": "Active Ambient",
-   "sha256": "5e00103e2720bce779747196e1ffa1075ee051577722c4e13bc06c72a0220d22",
-   "size": 126932,
-   "version": "2.5.5"
+   "sha256": "8b818794dae63f0f90b5d453a0dea541b410512c02b65f65202fa589b7a5ad29",
+   "size": 128724,
+   "version": "2.5.6"
   },
   "jmk-map-menu": {
    "built": "2026-11-14",
@@ -44,7 +44,7 @@ n6ntZ4TA22CtMamadHmd6WiJCxQET/LmabKxBXYDUzocQBPuvddfgWAEOfe2ZnWMJRFLtMnj9zj43qdj
   }
  },
  "published": "2026-11-14",
- "seq": 2026111407,
+ "seq": 2026111408,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
@@ -55,10 +55,10 @@ n6ntZ4TA22CtMamadHmd6WiJCxQET/LmabKxBXYDUzocQBPuvddfgWAEOfe2ZnWMJRFLtMnj9zj43qdj
  "supporters": [
   "4MKFCENK",
   "75W6V55N",
-  "BH62XGT6",
   "CXARBN6Y",
   "FUOMXAFB",
   "HH2KMTQO",
+  "KJUUBENZ",
   "LY3LOBUL",
   "P7WRSDC3",
   "QGWWKPPK",

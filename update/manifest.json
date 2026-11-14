@@ -16,12 +16,12 @@
  "packages": {
   "jmk-ambient-sound": {
    "built": "2026-11-14",
-   "file": "update/files/jmk-ambient-sound-2.5.5.zip",
+   "file": "update/files/jmk-ambient-sound-2.5.6.zip",
    "icon": "🎵",
    "name": "Active Ambient",
-   "sha256": "5e00103e2720bce779747196e1ffa1075ee051577722c4e13bc06c72a0220d22",
-   "size": 126932,
-   "version": "2.5.5"
+   "sha256": "8b818794dae63f0f90b5d453a0dea541b410512c02b65f65202fa589b7a5ad29",
+   "size": 128724,
+   "version": "2.5.6"
   },
   "jmk-map-menu": {
    "built": "2026-11-14",
@@ -43,7 +43,7 @@
   }
  },
  "published": "2026-11-14",
- "seq": 2026111407,
+ "seq": 2026111408,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
@@ -54,10 +54,10 @@
  "supporters": [
   "4MKFCENK",
   "75W6V55N",
-  "BH62XGT6",
   "CXARBN6Y",
   "FUOMXAFB",
   "HH2KMTQO",
+  "KJUUBENZ",
   "LY3LOBUL",
   "P7WRSDC3",
   "QGWWKPPK",
