@@ -1,4 +1,11 @@
 {
-  "_note": "Other head units allowed per feature (ro.build.product). GL3HEV = Kia K8 Hybrid, command table cfeb56ea606783d5 (2026-11-13) identical to ours; the developer (2026-11-14): consent pass and ambient on, warmer bar off, camping not yet.",
-  "GL3HEV.KOR.0000.V039.001.260902": ["consent", "ambient"]
+ "_note": "Other head units allowed per feature (ro.build.product). GL3HEV = Kia K8 Hybrid, command table cfeb56ea606783d5 (2026-11-13) identical to ours; the developer (2026-11-14): consent pass and ambient on, warmer bar off, camping not yet. GL3 = Kia K8 gasoline (car GL3AS), no command table sent yet; the developer (2026-11-14): the same car as the hybrid, so consent pass and ambient on as well; Active Ambient 2.5.7+ checks its light numbers by name and sends nothing if they differ.",
+ "GL3HEV.KOR.0000.V039.001.260902": [
+  "consent",
+  "ambient"
+ ],
+ "GL3.KOR.0000.V039.001.260902": [
+  "consent",
+  "ambient"
+ ]
 }

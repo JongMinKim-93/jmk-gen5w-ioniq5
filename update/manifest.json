@@ -1,5 +1,9 @@
 {
  "car_features_by_name": {
+  "GL3.KOR.0000.V039.001.260902": [
+   "ambient",
+   "consent"
+  ],
   "GL3HEV.KOR.0000.V039.001.260902": [
    "ambient",
    "consent"
@@ -16,12 +20,12 @@
  "packages": {
   "jmk-ambient-sound": {
    "built": "2026-11-14",
-   "file": "update/files/jmk-ambient-sound-2.5.6.zip",
+   "file": "update/files/jmk-ambient-sound-2.5.7.zip",
    "icon": "🎵",
    "name": "Active Ambient",
-   "sha256": "8b818794dae63f0f90b5d453a0dea541b410512c02b65f65202fa589b7a5ad29",
-   "size": 128724,
-   "version": "2.5.6"
+   "sha256": "c1ec391227eb1827f368b821e1ea3eb144ceaf34ae8a09212ce9e3825463f873",
+   "size": 129403,
+   "version": "2.5.7"
   },
   "jmk-map-menu": {
    "built": "2026-11-14",
@@ -43,7 +47,7 @@
   }
  },
  "published": "2026-11-14",
- "seq": 2026111408,
+ "seq": 2026111409,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",

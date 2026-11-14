@@ -1,6 +1,10 @@
-mCyNLJnRuusncx4FUnB2RDj4Vj6RsXGTKoWMhRNrwQ14nix5f+LPjuVfPL9p6AokKWPm+DmCps6uD9q0Y1GBWX9tLxJWOzfUiBX4evkrBHRuRFQCSH7x2m1hiq+MsAf7x6JNBVsL4FpTcSGrcEnNxAxsEB+HWC6rIoO8esc7hpZJMr3IZKHgCSohubme8UE+9VZEJlYBv+VWnnQY6Mjg8tHTA8O0pWQmnwwp+1xacLlJwMqsRJwXbVg7+0SlL9/xoJflS10Ncr9leI4EDZSi35ohmjLYVa57do1oNJuvsdui2WXh78J5LySCvIA3SYWLr9KX+Qa9m0YERlqXXSW0cC2GwUL2wdRuHgLHK61R4OW9Svx2yBVU6YmnBZpn9tx9ikW0MYP5Laz94wxucDifgBV+CgqNgp9xOPnSa93PauBUWXfqGgV3G2vLK9eOSezlun4VKhZWNkAaPEEPLN1H3HUyW+D4ODdkTcsK7ApPhJvy/G2a49HK3xZ03QM6xtZl
+wyT8nefa7VkVS8gptuzsm0Ls9rvWw/0VKpY+0gMi1UbhyO+6hgJ7BY/Muqiey0km6hoaHb9T62GYH3sEa9f3VOXSvE61WNplVSwjtGqPWSGOJSOBD8TKlfpZ+de7qOqblKkpB0XwRQFOrWp1PGvFWkPfvHcJ+TZ+81QEQyx+4mcQLVPGB+x1Lgt+Ie6l9oszfWncCPciTp6E4vvhW4Aqb2HllYjNoJkX/ypbskAVmK3NDvFMm+TPaDHE1AwW5VDeZ5TMRASg9EwB2lflnYEvEqgXblqWwpFEqsLfmdK84gR99y0rlzpdlibhGyf6buuM551R2OAP9MArVJypn1gvWB/kZRuFAqzK8W3YhCQ1T3YRLOKbgZKpxT60GWp35rSkCfNOpkjEXiRypMJAs1FZfIa33UFraaf6XT9BySQ6yCqqtfN8cPYOCCGsDiLUz3mNY0gcR3z8tZnGKxSTHz2sQM9/77NbINLzzOhWVTCg4PeNOnkv2qjerBNYctTb+OsH
 {
  "car_features_by_name": {
+  "GL3.KOR.0000.V039.001.260902": [
+   "ambient",
+   "consent"
+  ],
   "GL3HEV.KOR.0000.V039.001.260902": [
    "ambient",
    "consent"
@@ -17,12 +21,12 @@ mCyNLJnRuusncx4FUnB2RDj4Vj6RsXGTKoWMhRNrwQ14nix5f+LPjuVfPL9p6AokKWPm+DmCps6uD9q0
  "packages": {
   "jmk-ambient-sound": {
    "built": "2026-11-14",
-   "file": "update/files/jmk-ambient-sound-2.5.6.zip",
+   "file": "update/files/jmk-ambient-sound-2.5.7.zip",
    "icon": "🎵",
    "name": "Active Ambient",
-   "sha256": "8b818794dae63f0f90b5d453a0dea541b410512c02b65f65202fa589b7a5ad29",
-   "size": 128724,
-   "version": "2.5.6"
+   "sha256": "c1ec391227eb1827f368b821e1ea3eb144ceaf34ae8a09212ce9e3825463f873",
+   "size": 129403,
+   "version": "2.5.7"
   },
   "jmk-map-menu": {
    "built": "2026-11-14",
@@ -44,7 +48,7 @@ mCyNLJnRuusncx4FUnB2RDj4Vj6RsXGTKoWMhRNrwQ14nix5f+LPjuVfPL9p6AokKWPm+DmCps6uD9q0
   }
  },
  "published": "2026-11-14",
- "seq": 2026111408,
+ "seq": 2026111409,
  "shared_codes": [
   "BH62XGT6",
   "JRDFLK6V",
